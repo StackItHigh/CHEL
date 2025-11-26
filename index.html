@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>MONCHEL</title>
+
+    <!-- Load Anton -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Anton', sans-serif;
+            background: #b782e0;
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Raining Monchel Heads */
+        #monchel-rain {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 9999;
+        }
+
+        .monchel-drop {
+            position: fixed;
+            top: -100px; 
+            pointer-events: none;
+            width: 50px;
+            height: auto;
+            animation-name: fall;
+            animation-timing-function: linear;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0.8;
+            }
+        }
+
+        /* Main Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 0 0;
+            min-height: 70vh;
+        }
+
+        .hero-logo {
+            width: 320px;
+            height: auto;
+            display: block;
+            margin: 0;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+
+        .hero-image {
+            width: 56.35%;
+            max-width: none;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: -3px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-image img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Scrolling Banner */
+        .scrolling-banner {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 15px 0;
+            background: white;
+            border: 3px solid #000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            z-index: 5;
+        }
+
+        .banner-content {
+            display: inline-flex;
+            animation: scroll 25s linear infinite;
+            white-space: nowrap;
+            align-items: center;
+        }
+
+        .banner-text {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #b782e0; /* purple text */
+            margin-right: 120px;
+            flex-shrink: 0;
+            font-family: 'Anton', sans-serif;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Main Title Section */
+        .main-title {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+
+        .main-title h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-family: 'Anton', sans-serif;
+        }
+
+        .main-title p {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #ffffff;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-family: 'Anton', sans-serif;
+        }
+
+        /* Info Boxes */
+        .info-boxes {
+            padding: 60px 0;
+        }
+
+        .boxes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+            justify-items: center;
+        }
+
+        .info-box {
+            background: white;
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            border: 3px solid #000;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            max-width: 320px;
+            font-family: 'Anton', sans-serif;
+            color: #b782e0;
+        }
+
+        .info-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-box img {
+            width: 100%;
+            height: 180px;
+            border-radius: 20px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 2px solid #000;
+            display: block;
+        }
+
+        .info-box h3 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #b782e0; /* purple text */
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-box h3::before {
+            content: "⭐";
+            font-size: 1.6rem;
+            margin-right: 12px;
+        }
+
+        .info-box p {
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .info-box .highlight {
+            background: #b782e0;
+            color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        /* Social Icons */
+        .social-icons {
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .social-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 30px;
+            font-family: 'Anton', sans-serif;
+        }
+
+        .icons-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 70px;
+            height: 70px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 3px solid #000;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.2) rotate(5deg);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.5);
+        }
+
+        .social-icon img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* CA Section */
+        .ca-section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .ca-section h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+            font-family: 'Anton', sans-serif;
+            color: #ffffff; /* white heading */
+        }
+
+        .ca-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            color: #b782e0; /* purple paragraph */
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #b782e0;
+            word-break: break-all;
+            font-family: 'Anton', sans-serif;
+        }
+
+        /* About Section */
+        .about {
+            padding: 60px 0;
+            text-align: center;
+            background: url('monchelbackground2.png') center center/cover no-repeat;
+        }
+
+        .about h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            font-family: 'Anton', sans-serif;
+            color: #ffffff; /* white heading */
+        }
+
+        .about p {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.85);
+            color: #b782e0; /* purple paragraph */
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid #b782e0;
+            font-family: 'Anton', sans-serif;
+        }
+
+        .about strong {
+            color: #b782e0;
+            font-weight: 900;
+        }
+
+        /* Historical Images */
+        .historical-images {
+            padding: 60px 0 80px 0;
+            text-align: center;
+        }
+
+        .historical-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 40px;
+            font-family: 'Anton', sans-serif;
+        }
+
+        .historical-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            max-width: 800px;
+            margin: 0 auto;
+            justify-items: center;
+        }
+
+        .historical-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .historical-image:hover {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Mobile Fixes */
+        @media (max-width: 768px) {
+            .hero-logo {
+                width: 200px;
+                top: 10px;
+                left: 10px;
+            }
+
+            .hero {
+                padding: 60px 0 0;
+                min-height: 50vh;
+            }
+
+            .hero-image {
+                position: relative;
+                z-index: 10;
+                width: 100%;
+                margin-bottom: -3px;
+            }
+
+            .hero-image img {
+                width: 100%;
+                height: auto;
+            }
+
+            .main-title h1 {
+                font-size: 2.5rem;
+            }
+
+            .main-title p {
+                font-size: 1.2rem;
+            }
+
+            .banner-text {
+                font-size: 1.8rem;
+                margin-right: 40px;
+            }
+
+            .scrolling-banner {
+                padding: 10px 0;
+            }
+
+            .banner-content {
+                display: flex;
+                gap: 20px;
+                animation: scroll 20s linear infinite;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Raining Monchel Heads -->
+    <div id="monchel-rain"></div>
+
+    <section class="hero">
+        <div class="container">
+            <img src="monchellogo.png" alt="Monchel Logo" class="hero-logo">
+            <div class="hero-image">
+                <img src="MONCHEL.png" alt="Monchel">
+            </div>
+        </div>
+    </section>
+
+    <div class="scrolling-banner">
+        <div class="banner-content">
+            <span class="banner-text">$MONCHEL</span>
+            <span class="banner-text">$MONCHEL</span>
+            <span class="banner-text">$MONCHEL</span>
+            <span class="banner-text">$MONCHEL</span>
+            <span class="banner-text">$MONCHEL</span>
+            <span class="banner-text">$MONCHEL</span>
+            <span class="banner-text">$MONCHEL</span>
+            <span class="banner-text">$MONCHEL</span>
+            <span class="banner-text">$MONCHEL</span>
+            <span class="banner-text">$MONCHEL</span>
+        </div>
+    </div>
+
+    <section class="main-title">
+        <div class="container">
+            <h1>MONCHEL</h1>
+            <p>Monchel on Monad.</p>
+        </div>
+    </section>
+
+    <section class="info-boxes">
+        <div class="container">
+            <div class="boxes-container">
+                <div class="info-box">
+                    <img src="MONCHEL1.JPG" alt="Monchel Token">
+                    <h3>TOKEN</h3>
+                    <p><span class="highlight">$MONCHEL</span></p>
+                    <p>Based on Mon Network</p>
+                </div>
+
+                <div class="info-box">
+                    <img src="MONCHEL2.JPG" alt="Monchel Supply">
+                    <h3>SUPPLY</h3>
+                    <p><span class="highlight">1,000,000,000</span></p>
+                    <p>Total Maximum Supply</p>
+                </div>
+
+                <div class="info-box">
+                    <img src="MONCHEL3.JPG" alt="Monchel Liquidity">
+                    <h3>LIQUIDITY</h3>
+                    <p><span class="highlight">LP LOCKED</span></p>
+                    <p>10% Supply Locked</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="social-icons">
+        <div class="container">
+            <h3 class="social-title">JOIN THE MONCHEL COMMUNITY</h3>
+            <div class="icons-container">
+                <a href="#" class="social-icon">
+                    <img src="dexs.png" alt="DexScreener">
+                </a>
+                <a href="#" class="social-icon">
+                    <img src="dext.png" alt="DEXTools">
+                </a>
+                <a href="#" class="social-icon">
+                    <img src="tg.png" alt="Telegram">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="ca-section">
+        <div class="container">
+            <h2>CONTRACT ADDRESS</h2>
+            <p>489324723894723987429837</p>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="container">
+            <h2>ABOUT MONCHEL</h2>
+            <p>
+                <strong>Monchel</strong> is one of the OG Monad memes, long forgotten and back to hang out with the NADS. 
+                Smoking 20 cigs per day, drinking 5 beers and trying to steal Pepe's girlfriend, MONCHEL will be your favourite degen turtle.
+                Join the movement and become part of the <strong>Monchel</strong> family today!
+            </p>
+        </div>
+    </section>
+
+    <section class="historical-images">
+        <div class="container">
+            <h3 class="historical-title">MONCHEL GALLERY</h3>
+            <div class="historical-grid">
+                <img src="MONCHEL4.PNG" alt="Monchel Community" class="historical-image">
+                <img src="MONCHEL5.JPG" alt="Monchel Token" class="historical-image">
+                <img src="MONCHEL6.PNG" alt="Monchel Base" class="historical-image">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const rainContainer = document.getElementById('monchel-rain');
+        const totalDrops = 30;
+
+        for (let i = 0; i < totalDrops; i++) {
+            const drop = document.createElement('img');
+            drop.src = 'MONCHELhead.png';
+            drop.classList.add('monchel-drop');
+
+            drop.style.left = Math.random() * window.innerWidth + 'px';
+            const size = 30 + Math.random() * 40;
+            drop.style.width = size + 'px';
+            drop.style.height = 'auto';
+            drop.style.animationDuration = 3 + Math.random() * 5 + 's';
+            drop.style.animationDelay = Math.random() * 5 + 's';
+
+            rainContainer.appendChild(drop);
+        }
+    </script>
+
+</body>
+</html>
